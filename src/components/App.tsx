@@ -8,7 +8,7 @@ import {
   useThemeParams,
   useViewport,
 } from '@tma.js/sdk-react';
-import { AppRoot } from '@telegram-apps/telegram-ui';
+import { AppRoot, List } from '@telegram-apps/telegram-ui';
 import { type FC, useEffect, useMemo } from 'react';
 import {
   Navigate,
@@ -18,14 +18,10 @@ import {
 } from 'react-router-dom';
 
 import { routes } from '@/navigation/routes.tsx';
+import { DisplayData } from './DisplayData/DisplayData';
 
 export const App: FC = () => {
   const lp = useLaunchParams();
-
-  if(lp.platform !== 'ios' && lp.platform !== 'android') {
-    return 
-  }
-
   const miniApp = useMiniApp();
   const themeParams = useThemeParams();
   const viewport = useViewport();
@@ -53,6 +49,16 @@ export const App: FC = () => {
     navigator.attach();
     return () => navigator.detach();
   }, [navigator]);
+
+  if(lp.platform !== 'ios' && lp.platform !== 'android') {
+    return (<List>
+    <DisplayData
+      rows={[
+        { title: 'No desctop', value: "Just play on mobile" },
+      ]}
+    />
+  </List>)
+  }
 
   return (
     <AppRoot
