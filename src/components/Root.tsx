@@ -1,4 +1,4 @@
-import { SDKProvider, /*useLaunchParams*/ } from '@tma.js/sdk-react';
+import { SDKProvider, useLaunchParams } from '@tma.js/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { type FC, useEffect, useMemo } from 'react';
 
@@ -21,19 +21,25 @@ const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
 );
 
 const Inner: FC = () => {
-  //const debug = useLaunchParams().startParam === 'debug';
+  const debug = useLaunchParams().startParam === 'debug';
   const manifestUrl = useMemo(() => {
     return new URL('tonconnect-manifest.json', window.location.href).toString();
   }, []);
 
-  // Enable debug mode to see all the methods sent and events received.
+  /* Enable debug mode to see all the methods sent and events received.
+  useEffect(() => {
+    if (debug) {
+      import('eruda').then((lib) => lib.default.init());
+    }
+  }, [debug]); */
+
   useEffect(() => {
     import('eruda').then((lib) => lib.default.init());
   }, []);
 
   return (
     <TonConnectUIProvider manifestUrl={manifestUrl}>
-      <SDKProvider acceptCustomStyles debug>
+      <SDKProvider acceptCustomStyles debug={debug}>
         <App/>
       </SDKProvider>
     </TonConnectUIProvider>
