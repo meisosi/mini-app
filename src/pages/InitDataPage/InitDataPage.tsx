@@ -79,8 +79,8 @@ export const InitDataPage: FC = () => {
   if (!initDataRows) {
     return (
       <Placeholder
-        header="Oops"
-        description="Application was launched with missing init data"
+        header="LOL"
+        description="While this app starting our server lost your init data"
       >
         <img
           alt="Telegram sticker"

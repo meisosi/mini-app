@@ -6,6 +6,7 @@ import { Link } from '@/components/Link/Link.tsx';
 import tonSvg from './ton.svg';
 
 import './IndexPage.css';
+// Добавить Dice компонент
 
 export const IndexPage: FC = () => {
   return (
@@ -18,6 +19,11 @@ export const IndexPage: FC = () => {
             TON Connect
           </Cell>
         </Link>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh' }}>
+          <div style={{ width: '400px', height: '400px' }}>
+            <Dice onRoll/>
+          </div>
+        </div>
     </List>
   );
 };
